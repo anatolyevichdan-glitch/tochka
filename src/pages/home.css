@@ -1,0 +1,33 @@
+.hero { display: grid; align-items: center; gap: 1.8rem; padding-block: clamp(2rem, 5.5vw, 4.7rem); }
+.hero h1 { font-size: clamp(2.4rem, 6vw, 5.1rem); letter-spacing: -.07em; max-width: 13ch; text-wrap: initial; }
+.hero h1 em { color: #38634e; font-style: normal; }
+.hero-copy .actions { margin-top: 1.55rem; }
+.hero-demo { margin-top: .95rem; color: var(--muted); font-size: .85rem; }
+.hero-photo { margin: 0; min-width: 0; }
+.hero-photo img { width: 100%; height: clamp(265px, 53vw, 535px); object-fit: cover; object-position: 50% 73%; border-radius: 1rem 1rem 1rem 3rem; background: #d9d1ab; }
+.hero-photo figcaption { font-size: .72rem; color: var(--muted); text-align: right; padding-top: .45rem; }
+.hero-photo a:hover { text-decoration: underline; }
+.home-topics { padding-block: clamp(2.3rem, 6vw, 4.7rem); background: #f0ece1; border-block: 1px solid #e6e2d7; }
+.topic-grid { display: grid; gap: 0 1.5rem; margin-top: 1.5rem; }
+.topic-grid article { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; padding: 1.15rem 0; border-top: 1px solid #d8d8ca; }
+.topic-grid svg, .home-privacy svg { color: #38634e; }
+.topic-grid p, .home-privacy p { font-size: .94rem; color: var(--muted); margin-top: .35rem; }
+.journey { padding-block: clamp(2.3rem, 6vw, 4.7rem); display: grid; gap: 1.7rem; }
+.journey a { display: inline-block; margin-top: 1rem; }
+.journey li { display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--line); padding-block: .7rem; font-weight: 630; }
+.journey li span { display: inline-grid; place-items: center; width: 2rem; height: 2rem; flex-shrink: 0; border-radius: 50%; background: #e4ebdf; color: #254e3e; font-size: .86rem; }
+.home-privacy { padding-block: 2.25rem; background: #e4ebdf; }
+.home-privacy ul { display: grid; gap: .9rem 1.3rem; margin-block: 1.4rem; }
+.home-privacy li { display: flex; align-items: center; gap: .55rem; }
+.home-privacy svg { flex-shrink: 0; }
+.home-emergency { padding-block: clamp(1.8rem, 5vw, 3.5rem); }
+@media (min-width: 620px) {
+  .topic-grid, .home-privacy ul { grid-template-columns: repeat(2, 1fr); }
+  .journey { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 860px) {
+  .hero { grid-template-columns: 1.07fr .93fr; gap: clamp(2rem, 5vw, 4.5rem); }
+  .hero-photo img { height: clamp(420px, 43vw, 565px); }
+  .topic-grid { grid-template-columns: repeat(3, 1fr); }
+  .home-privacy ul { grid-template-columns: repeat(4, 1fr); }
+}
