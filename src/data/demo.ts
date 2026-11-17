@@ -4,17 +4,17 @@ import type { Appeal, Attachment, DemoData, Employee, Message, RoutingAppeal } f
 import { seedData } from './seed'
 
 const storageKey = 'otklik:demo:v1'
-function read(): DemoData {
+function readStored(): DemoData | undefined {
   try {
     const value = localStorage.getItem(storageKey)
     if (value) return JSON.parse(value) as DemoData
   } catch {
     // The demo also works in memory when storage is blocked.
   }
-  return seedData()
+  return undefined
 }
 
-let data = read()
+let data = readStored() ?? seedData()
 const listeners = new Set<() => void>()
 const attachments = new Map<string, File>()
 const notify = () => listeners.forEach(listener => listener())
@@ -22,7 +22,7 @@ const now = () => new Date().toISOString()
 
 window.addEventListener('storage', event => {
   if (event.key !== storageKey && event.key !== null) return
-  data = read()
+  data = readStored() ?? seedData()
   notify()
 })
 
@@ -123,6 +123,13 @@ export const demo = {
         id: crypto.randomUUID(), author, kind, time: now(), text, files: registerFiles(files),
       }],
     })
+  },
+
+  reply(id: string, messageId: string, text: string) {
+    const current = (readStored() ?? data).appeals.find(appeal => appeal.id === id)
+    const last = current?.messages.at(-1)
+    if (last?.id !== messageId || last.author !== 'user') return
+    this.send(id, 'demo', text)
   },
 
   openFile(id: string) {
