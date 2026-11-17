@@ -1,0 +1,17 @@
+.stack { display: grid; gap: 1.1rem; }
+.field { display: grid; gap: .4rem; font-weight: 620; min-width: 0; }
+.input { display: block; width: 100%; min-width: 0; min-height: 46px; border: 1px solid #aab5a7; border-radius: .5rem; padding: .65rem .75rem; background: #fffdf8; color: #222e28; font: inherit; font-weight: 450; }
+textarea.input { resize: vertical; }
+.input[aria-invalid=true] { border-color: #9a5137; }
+.subtle { color: var(--muted); font-size: .9rem; }
+.error { color: #8f3d25; font-size: .94rem; font-weight: 570; }
+.success { color: #254e3e; font-size: .94rem; font-weight: 610; }
+.file-picker { cursor: pointer; }
+.file-picker:focus-within { outline: 3px solid #9a5137; outline-offset: 3px; }
+.file-list { display: grid; gap: .4rem; margin-top: .45rem; }
+.file-list li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .55rem; padding: .45rem .6rem; border: 1px solid #d9dfd2; background: #faf8f3; border-radius: .5rem; }
+.file-list li div { overflow-wrap: anywhere; }
+.file-list small { display: block; color: var(--muted); }
+.chip { background: #e4ebdf; color: #2e4b3a; padding: .25rem .5rem; border-radius: .35rem; font-size: .79rem; font-weight: 680; display: inline-block; }
+.chip.urgent { background: #f4e0d6; color: #833e29; }
+.empty { color: var(--muted); padding: 1.25rem 0; }
