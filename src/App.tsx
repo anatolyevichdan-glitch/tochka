@@ -1,3 +1,4 @@
+import { HelpPage } from './pages/HelpPage'
 import { HowItWorksPage } from './pages/HowItWorksPage'
 import { AboutPage } from './pages/AboutPage'
 import { HomePage } from './pages/HomePage'
@@ -12,6 +13,7 @@ export function App() {
       <Route index element={<HomePage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/how-it-works" element={<HowItWorksPage />} />
+      <Route path="/help" element={<HelpPage />} />
     </Route>
   </Routes>
 }
