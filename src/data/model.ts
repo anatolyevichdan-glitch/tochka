@@ -14,6 +14,7 @@ export type Employee = { id: string; name: string; role: Role; active: boolean }
 export type Message = {
   id: string
   author: 'user' | 'expert' | 'demo'
+  employeeId?: string
   kind: 'message' | 'recommendation'
   time: string
   text: string

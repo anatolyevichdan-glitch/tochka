@@ -9,7 +9,7 @@ const labels: Record<Message['author'], string> = {
   user: 'Заявитель', expert: 'Специалист', demo: 'Демонстрационный ответ',
 }
 
-export function Chat({ appeal, author, waiting = false }: { appeal: Appeal; author: 'user' | 'expert'; waiting?: boolean }) {
+export function Chat({ appeal, author, employeeId, waiting = false }: { appeal: Appeal; author: 'user' | 'expert'; employeeId?: string; waiting?: boolean }) {
   const [text, setText] = useState('')
   const [files, setFiles] = useState<File[]>([])
   const [error, setError] = useState('')
@@ -20,9 +20,13 @@ export function Chat({ appeal, author, waiting = false }: { appeal: Appeal; auth
     if (log.current) log.current.scrollTop = log.current.scrollHeight
   }, [appeal.messages, waiting])
 
+  function isOwn(message: Message) {
+    return message.author === author && (author === 'user' || Boolean(employeeId && message.employeeId === employeeId))
+  }
+
   function send() {
     if (closed || (!text.trim() && !files.length)) return
-    demo.send(appeal.id, author, text.trim(), files, kind)
+    demo.send(appeal.id, author, text.trim(), files, kind, employeeId)
     setText('')
     setFiles([])
     setError('')
@@ -31,8 +35,8 @@ export function Chat({ appeal, author, waiting = false }: { appeal: Appeal; auth
   return <div className="chat">
     <div className="chat-log" role="log" aria-label="Переписка" tabIndex={0} ref={log}>
       {!appeal.messages.length && <div className="chat-empty"><MessageCircle size={26}/><p>Переписка пока пуста</p></div>}
-      {appeal.messages.map(message => <article className={'bubble' + (message.author === author ? ' own' : '')} key={message.id}>
-        <div className="bubble-meta"><strong>{message.author === author ? 'Вы' : labels[message.author]}</strong><time dateTime={message.time}>{new Date(message.time).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}</time></div>
+      {appeal.messages.map(message => <article className={'bubble' + (isOwn(message) ? ' own' : '')} key={message.id}>
+        <div className="bubble-meta"><strong>{isOwn(message) ? 'Вы' : labels[message.author]}</strong><time dateTime={message.time}>{new Date(message.time).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}</time></div>
         {message.kind === 'recommendation' && <span className="chip">Рекомендация</span>}
         {message.text && <p>{message.text}</p>}
         <SavedFiles files={message.files}/>

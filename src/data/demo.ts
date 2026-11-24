@@ -117,10 +117,10 @@ export const demo = {
     })
   },
 
-  send(id: string, author: Message['author'], text: string, files: File[] = [], kind: Message['kind'] = 'message') {
+  send(id: string, author: Message['author'], text: string, files: File[] = [], kind: Message['kind'] = 'message', employeeId?: string) {
     updateAppeal(id, appeal => appeal.status === 'Завершено' ? appeal : {
       ...appeal, messages: [...appeal.messages, {
-        id: crypto.randomUUID(), author, kind, time: now(), text, files: registerFiles(files),
+        id: crypto.randomUUID(), author, employeeId, kind, time: now(), text, files: registerFiles(files),
       }],
     })
   },
